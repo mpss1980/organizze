@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Organizze</string>
+    <string name="intro_one_description">intro one</string>
+    <string name="intro_one_content">Organize your accounts \nfrom were you are</string>
+    <string name="intro_one_content_two">Free, easy and simple to use</string>
+    <string name="intro_two_content">Knowing where your money flows</string>
+    <string name="intro_two_content_two">Categorize your money entries \nknowing the destiny of each cent</string>
+    <string name="intro_three_content">Never ever forget paying bills</string>
+    <string name="intro_three_content_two">Receive alerts when you want</string>
+    <string name="intro_four_content">Everything organize \nin your smartphone</string>
+    <string name="intro_four_content_two">You can also access Organizze \nby the website</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="subscribe_subtitle">Join to more than \na half million people now</string>
+    <string name="subscribe_title">Subscribe for free</string>
+    <string name="have_an_account">I already have an account</string>
+    <string name="content_description_image_slider">Image describing an app facility</string>
+</resources>
