@@ -50,13 +50,14 @@ class MainActivity : AppCompatActivity() {
             ),
         )
 
-        adapter = SlideIntroAdapter(sliders)
+        adapter = SlideIntroAdapter(this, sliders)
         binding.introViewPager.adapter = adapter
         binding.introViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.introViewPager.setCurrentItem(0, true)
 
         setupIndicators()
         setCurrentIndicator(0)
+
         binding.introViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -64,17 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-//       binding.btnGoToSubscribe.setOnClickListener {
-//           Intent(this, SubscribeActivity::class.java).also {
-//               startActivity(it)
-//           }
-//       }//todo: não navega
-//
-//        binding.tvHaveAnAccount.setOnClickListener {
-//            Intent(this, LoginActivity::class.java).also {
-//                startActivity(it)
-//            }
-//        }
     }
 
     private fun setupIndicators() {
