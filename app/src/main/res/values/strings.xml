@@ -3,7 +3,7 @@
     <string name="intro_one_description">intro one</string>
     <string name="intro_one_content">Organize your accounts \nfrom were you are</string>
     <string name="intro_one_content_two">Free, easy and simple to use</string>
-    <string name="intro_two_content">Knowing where your money flows</string>
+    <string name="intro_two_content">Knowing where \nyour money flows</string>
     <string name="intro_two_content_two">Categorize your money entries \nknowing the destiny of each cent</string>
     <string name="intro_three_content">Never ever forget paying bills</string>
     <string name="intro_three_content_two">Receive alerts when you want</string>
@@ -14,4 +14,11 @@
     <string name="subscribe_title">Subscribe for free</string>
     <string name="have_an_account">I already have an account</string>
     <string name="content_description_image_slider">Image describing an app facility</string>
+    <string name="subscribe_for_free">Subscribe for free</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="use_terms">Use terms</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
 </resources>

@@ -6,6 +6,6 @@ import br.com.coupledev.organizze.core.Usecase
 class SubscribeUsecase: Usecase<SubscribeInput, Boolean>() {
 
     override suspend fun execute(input: SubscribeInput): Resource<Boolean> {
-        TODO("Not yet implemented")
+        return Resource.Success(true)
     }
 }
