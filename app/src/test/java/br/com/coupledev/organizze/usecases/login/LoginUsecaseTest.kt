@@ -1,8 +1,12 @@
-package br.com.coupledev.organizze.usecases.subscribe
+package br.com.coupledev.organizze.usecases.login
 
 import br.com.coupledev.organizze.core.Failure
 import br.com.coupledev.organizze.core.Resource
+import br.com.coupledev.organizze.domain.entities.User
 import br.com.coupledev.organizze.domain.repositories.UserRepository
+import br.com.coupledev.organizze.domain.value_objects.Email
+import br.com.coupledev.organizze.domain.value_objects.Name
+import br.com.coupledev.organizze.domain.value_objects.Password
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -10,37 +14,34 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class SubscribeUsecaseTest {
+class LoginUsecaseTest{
     private lateinit var userRepository: UserRepository
-    private lateinit var usecase: SubscribeUsecase
+    private lateinit var usecase: LoginUsecase
 
-    private val input = SubscribeInput(
-        name = "Marcos Sousa",
+    private val input = LoginInput(
         email = "marcosp.sousa@gmail.com",
         password = "abcd1234",
-        repeatedPassword = "abcd1234"
+    )
+
+    private val user = User(
+        name = Name("Marcos Sousa"),
+        email = Email("marcosp.sousa@gmail.com"),
+        password = Password("abcd1234")
     )
 
     @Before
     fun setup() {
         userRepository = mockk()
-        usecase = SubscribeUsecase(userRepository)
+        usecase = LoginUsecase(userRepository)
     }
 
     @Test
-    fun `should return true when success`()  = runBlocking {
-        coEvery { userRepository.save(any()) } returns Resource.Success(true)
+    fun `should return an user when success`()  = runBlocking {
+        coEvery { userRepository.login(any(), any()) } returns Resource.Success(user)
 
         val result = usecase.execute(input)
 
-        assertThat(result.data).isEqualTo(true)
-    }
-
-    @Test
-    fun `should return an error when name is invalid`()  = runBlocking {
-        val result = usecase.execute(input.copy(name = " "))
-
-        assertThat(result.failure).isEqualTo(Failure.INVALID_PARAMETERS)
+        assertThat(result.data).isEqualTo(user)
     }
 
     @Test
@@ -48,6 +49,7 @@ class SubscribeUsecaseTest {
         val result = usecase.execute(input.copy(email = " "))
 
         assertThat(result.failure).isEqualTo(Failure.INVALID_PARAMETERS)
+        assertThat(result.message).isEqualTo("Invalid email or password")
     }
 
     @Test
@@ -55,22 +57,16 @@ class SubscribeUsecaseTest {
         val result = usecase.execute(input.copy(password = "123"))
 
         assertThat(result.failure).isEqualTo(Failure.INVALID_PARAMETERS)
-    }
-
-    @Test
-    fun `should return an error when repeated password is not equal to password`()  = runBlocking {
-        val result = usecase.execute(input.copy(repeatedPassword = "123"))
-
-        assertThat(result.failure).isEqualTo(Failure.INVALID_PARAMETERS)
-        assertThat(result.message).isEqualTo("The repeated password doesn't match")
+        assertThat(result.message).isEqualTo("Invalid email or password")
     }
 
     @Test
     fun `should return a failure when repository fails`()  = runBlocking {
-        coEvery { userRepository.save(any()) } returns Resource.Error(Failure.FAILURE)
+        coEvery { userRepository.login(any(), any()) } returns Resource.Error(Failure.FAILURE)
 
         val result = usecase.execute(input)
 
         assertThat(result.failure).isEqualTo(Failure.FAILURE)
+        assertThat(result.message).isEqualTo("Invalid email or password")
     }
 }

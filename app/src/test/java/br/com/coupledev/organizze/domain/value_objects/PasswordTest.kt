@@ -8,7 +8,7 @@ import kotlin.test.assertFailsWith
 class PasswordTest {
 
     @Test
-    fun `should return a TooShortError when password length is shorter than 8`() {
+    fun `should throw a TooShortError when password length is shorter than 8`() {
         val exception = assertFailsWith<ValueObjectError.TooShortError>(
             block = { Password("1ab1")}
         )
@@ -17,7 +17,7 @@ class PasswordTest {
     }
 
     @Test
-    fun `should return a InvalidError when password doesn't have any digit`() {
+    fun `should throw a InvalidError when password doesn't have any digit`() {
         val exception = assertFailsWith<ValueObjectError.InvalidError>(
             block = { Password("abcdfghitjklm")}
         )
@@ -26,7 +26,7 @@ class PasswordTest {
     }
 
     @Test
-    fun `should return a InvalidError when password doesn't have any letter`() {
+    fun `should throw a InvalidError when password doesn't have any letter`() {
         val exception = assertFailsWith<ValueObjectError.InvalidError>(
             block = { Password("0123456789")}
         )

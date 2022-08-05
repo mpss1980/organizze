@@ -8,7 +8,7 @@ import kotlin.test.assertFailsWith
 class NameTest {
 
     @Test
-    fun `should return a BlankError when name is empty`() {
+    fun `should throw a BlankError when name is empty`() {
         val exception = assertFailsWith<ValueObjectError.BlankError>(
             block = { Name("")}
         )
@@ -17,7 +17,7 @@ class NameTest {
     }
 
     @Test
-    fun `should return a BlankError when name is blank`() {
+    fun `should throw a BlankError when name is blank`() {
         val exception = assertFailsWith<ValueObjectError.BlankError>(
             block = { Name(" ")}
         )
@@ -26,7 +26,7 @@ class NameTest {
     }
 
     @Test
-    fun `should return a OneWordError when name has one word`() {
+    fun `should throw a OneWordError when name has one word`() {
         val exception = assertFailsWith<ValueObjectError.OneWordError>(
             block = { Name("Marcos")}
         )

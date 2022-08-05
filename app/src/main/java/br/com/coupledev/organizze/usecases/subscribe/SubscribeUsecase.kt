@@ -3,11 +3,15 @@ package br.com.coupledev.organizze.usecases.subscribe
 import br.com.coupledev.organizze.core.Failure
 import br.com.coupledev.organizze.core.Resource
 import br.com.coupledev.organizze.core.Usecase
+import br.com.coupledev.organizze.domain.entities.User
+import br.com.coupledev.organizze.domain.repositories.UserRepository
 import br.com.coupledev.organizze.domain.value_objects.Email
 import br.com.coupledev.organizze.domain.value_objects.Name
 import br.com.coupledev.organizze.domain.value_objects.Password
 
-class SubscribeUsecase : Usecase<SubscribeInput, Boolean>() {
+class SubscribeUsecase(
+    private val userRepository: UserRepository
+) : Usecase<SubscribeInput, Boolean>() {
 
     override suspend fun execute(input: SubscribeInput): Resource<Boolean> {
 
@@ -36,6 +40,8 @@ class SubscribeUsecase : Usecase<SubscribeInput, Boolean>() {
             )
         }
 
-        return Resource.Success(true)
+        val user = User(name = name, email = email, password = password)
+
+        return userRepository.save(user)
     }
 }
